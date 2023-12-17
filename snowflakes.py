@@ -4,14 +4,14 @@ import time
 import random
 import random
 
-SLEEP_TIME = 0.2
+SLEEP_TIME = 0.15
 TOTAL_SNOWFLAKES = 8
 
 def move_snowflakes():
     # count snowflakes
     count = count_snowflakes()
-    if count <= 0:
-        set_random_snowflakes()
+    if count <= 3:
+        add_snowflakes()
 
     # display current snowflakes
     for y in range(height):
@@ -46,6 +46,16 @@ def count_snowflakes():
 # Genera 5 posizioni casuali
 def set_random_snowflakes():
     positions = random.sample(range(width * height), TOTAL_SNOWFLAKES)
+
+    # Imposta i pixel alle posizioni casuali a 1
+    for position in positions:
+        x = position % width
+        y = position // width
+        snowflake_display[y][x] = 1
+
+# add 5 additional snowflakes on top on the first 2 rows
+def add_snowflakes():
+    positions = random.sample(range(width * 2), 5)
 
     # Imposta i pixel alle posizioni casuali a 1
     for position in positions:
